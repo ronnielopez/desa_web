@@ -92,10 +92,12 @@ $(document).ready(function(){
 
 })();
 
-$("#enviar").click(function (event){
-    const nombre = document.getElementById("name");
-    const phone = document.getElementById("phone");
-    const data = document.getElementById("data");
+/*$("#enviar").click(function (event){
+    event.preventDefault();
+    const nombre = document.getElementById("name").value;
+    const phone = document.getElementById("phone").value;
+    const data = document.getElementById("data").value;
+    alert("" + data + phone + nombre);
     Email.send({
         To : 'ronnielopez503@gmail.com',
         From : "ronnielopez503@gmail.com",
@@ -104,4 +106,34 @@ $("#enviar").click(function (event){
     }).then(
       message => alert(message)
     );
+});*/
+
+
+var nodemailer = require('nodemailer');
+
+var transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+    user: 'ronnielopez503@gmail.com',
+    pass: 'nacho1010'
+  }
+});
+
+var mailOptions = {
+  from: 'ronnielopez503@gmail.com',
+  to: 'ronnielopez503@gmail.com',
+  subject: 'sdkjadasñldksd',
+  text: 'That was easy!'
+};
+
+$("#enviar").click(function (event){
+
+transporter.sendMail(mailOptions, function(error, info){
+  if (error) {
+    console.log(error);
+  } else {
+    console.log('Email sent: ' + info.response);
+  }
+});
+
 });
